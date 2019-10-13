@@ -1,6 +1,56 @@
+
+   //initial firebase
+   var firebaseConfig = {
+    apiKey: "AIzaSyCKq4RohgjtKq85_nuEFW0t9esnv0jOhF4",
+    authDomain: "fastfood-d742f.firebaseapp.com",
+    databaseURL: "https://fastfood-d742f.firebaseio.com",
+    projectId: "fastfood-d742f",
+    storageBucket: "fastfood-d742f.appspot.com",
+    messagingSenderId: "959087323418",
+    appId: "1:959087323418:web:c926ea3dd9d34a2f64a4a3"
+   };
+   firebase.initializeApp(firebaseConfig);
+
+   var db = firebase.firestore();
+
+
+// ดูสถานะการ login
+
+
 document.addEventListener('init', function (event) {
-    var page = event.target;
-    console.log(page.id);
+  var page = event.target;
+ 
+
+
+
+//   if (page.id === 'homePage') {
+
+//     $("#menubtn").click(function () {
+//       $("#sidemenu")[0].open();      
+//     });
+
+//     $("#carousel").empty();
+//     db.collection("recommended").get().then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+          
+//         var item = `
+//         <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+//             <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+//             </div>
+//             <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+//         </ons-carousel-item>`
+
+//         $("#carousel").append(item);
+
+
+//       });
+//     });
+
+//   }
+
+
+
+
 
     if (page.id === "tabbar") {
         //Code for tabbar
@@ -48,8 +98,72 @@ document.addEventListener('init', function (event) {
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
+
+        
+    $("#carousel").empty();
+    db.collection("recommended").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          
+        var item = `
+        <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+            <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+            </div>
+            <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+        </ons-carousel-item>`
+
+        $("#carousel").append(item);
+
+
+      });
+    });
+
     }
 
+    if (page.id === "tab1") {
+       
+        $("#carousel").empty();
+        db.collection("recommended").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              
+            var item = `
+            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+                <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+                </div>
+                <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+            </ons-carousel-item>`
+    
+            $("#carousel").append(item);
+    
+    
+          });
+        });
+    
+      }
+
+
+      if (page.id === 'homePage') {
+        console.log("homePage");
+
+    
+        $("#carousel").empty();
+        db.collection("recommended").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              
+            var item = `
+            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+                <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+                </div>
+                <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+            </ons-carousel-item>`
+    
+            $("#carousel").append(item);
+    
+    
+          });
+        });
+    
+      }
+    
 
     if (page.id === "tab2") {
 
@@ -175,6 +289,8 @@ document.addEventListener('init', function (event) {
 
         
     }
+
+    
 
     if (page.id === "sidemenu") {
         //Code for sidemenu

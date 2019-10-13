@@ -2,15 +2,23 @@
 
     <ons-list>
         <div style=" background-color:#FF9900 ; color:white;width:98% ;"><br>
-            &nbsp;&nbsp;&nbsp;<i class="zmdi zmdi-fire" style=" color:red ; "></i>
-            Promotion Hot <br> <br></div>
+            &nbsp;&nbsp;&nbsp; <i class="zmdi zmdi-flash" style=" color:red ;"></i>
+            Promotion 1 Free 1<br> <br></div>
     </ons-list>
 
 
-    <ons-button modifier="quiet" style="margin-top: 5px;">
-        <img src="https://www.promotiontoyou.com/wp-content/uploads/2015/10/1-pizzahut1.jpg" width="320" height="200px">
-    </ons-button>
+    <div class="content" style="text-align: center;">
+            <div class="recomended">
+                <h4>Recomended</h4>
+                <ons-carousel auto-scroll auto-scroll-ratio="0.5" auto-refresh swipeable overscrollable item-width="130px"
+                    class="recomended_list" id="carousel">               
+                </ons-carousel>
+            </div>
+  
+
     <ons-list>
+
+
         <div style=" background-color:#FF9900 ; color:white;width:98% ;"><br>
 
             &nbsp;&nbsp;&nbsp; <i class="zmdi zmdi-flash" style=" color:red ;"></i>
@@ -24,3 +32,15 @@
 
 
 </ons-page>
+<style type="text/css">
+    .thumbnail {
+        width: 120px;
+        height: 120px;
+        display: table;
+        background-color: rgba(0, 0, 0, 0.42);
+    }
+
+    .recomended_list {
+        height: 150px;
+    }
+</style>
