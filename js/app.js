@@ -99,34 +99,18 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-        
-    $("#carousel").empty();
-    db.collection("recommended").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          
-        var item = `
-        <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-            <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
-            </div>
-            <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
-        </ons-carousel-item>`
 
-        $("#carousel").append(item);
-
-
-      });
-    });
 
     }
 
     if (page.id === "tab1") {
        
-        $("#carousel").empty();
+       
         db.collection("recommended").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
               
             var item = `
-            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_items">
                 <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
                 </div>
                 <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
@@ -137,6 +121,23 @@ document.addEventListener('init', function (event) {
     
           });
         });
+
+        db.collection("recommended").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+                
+              var item1 = `
+              <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+                  <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+                  </div>
+                  <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+              </ons-carousel-item>`
+      
+              $("#carousels").append(item1);
+      
+      
+            });
+          });
+  
     
       }
 
