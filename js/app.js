@@ -1,17 +1,5 @@
 
-   //initial firebase
-//    var firebaseConfig = {
-//     apiKey: "AIzaSyCKq4RohgjtKq85_nuEFW0t9esnv0jOhF4",
-//     authDomain: "fastfood-d742f.firebaseapp.com",
-//     databaseURL: "https://fastfood-d742f.firebaseio.com",
-//     projectId: "fastfood-d742f",
-//     storageBucket: "fastfood-d742f.appspot.com",
-//     messagingSenderId: "959087323418",
-//     appId: "1:959087323418:web:c926ea3dd9d34a2f64a4a3"
-//    };
-//    firebase.initializeApp(firebaseConfig);
 
-//    var db = firebase.firestore();
 
 var firebaseConfig = {
     apiKey: "AIzaSyDE0ldLjuWiAYtcbl3G9kKalNOwxeFw3yg",
@@ -21,47 +9,65 @@ var firebaseConfig = {
     storageBucket: "food-e0c82.appspot.com",
     messagingSenderId: "909826880316",
     appId: "1:909826880316:web:bc7974ce3d92b90c63a439"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 var db = firebase.firestore();
 // ดูสถานะการ login
 
 
 document.addEventListener('init', function (event) {
-  var page = event.target;
- 
+    var page = event.target;
 
 
 
-//   if (page.id === 'homePage') {
+    //login
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            //var displayName = user.displayName;
+            var email = user.email;
+            console.log(email + "signed in");
+            // var emailVerified = user.emailVerified;
+            // var photoURL = user.photoURL;
+            // var isAnonymous = user.isAnonymous;
+            // var uid = user.uid;
+            // var providerData = user.providerData;
+            // ...
+        } else {
+            console.log("sign out");
+            // User is signed out.
+            // ...
+        }
+    });
 
-//     $("#menubtn").click(function () {
-//       $("#sidemenu")[0].open();      
-//     });
+    if (page.id === 'loginPage') {
+        console.log("loginPage");
 
-//     $("#carousel").empty();
-//     db.collection("recommended").get().then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-          
-//         var item = `
-//         <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-//             <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
-//             </div>
-//             <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
-//         </ons-carousel-item>`
-
-//         $("#carousel").append(item);
+        $("#signinbtn").click(function () {
+            var username = $("#username").val();
+            var password = $("#password").val();
 
 
-//       });
-//     });
+            firebase.auth().signInWithEmailAndPassword(username, password)
+                .then(function (result) {
+                    console.log(result);
+                    ons.notification.alert("LOGIN Complete!!!");
+                    content.load('tabbar.html')
+                        .then(menu.close.bind(menu));
 
-//   }
+                }).catch(function (error) {
+                    console.log(error.message);
+                    ons.notification.alert(error.message);
+                });
 
+        })
 
-
-
+        $("#backhomebtn").click(function () {
+            $("#content")[0].load("home.html");
+        });
+    }
 
     if (page.id === "tabbar") {
         //Code for tabbar
@@ -70,18 +76,20 @@ document.addEventListener('init', function (event) {
             menu.open();
         });
 
-        $("#signinbtn").click(function () {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if (username === 'a' && password === '123') {
-                ons.notification.alert('Welcone Mockfood');
-                content.load('tabbar.html')
-                    .then(menu.close.bind(menu));
 
-            } else {
-                ons.notification.alert('username=a and password=123');
-            }
-        });
+
+        // $("#signinbtn").click(function () {
+        //     var username = document.getElementById('username').value;
+        //     var password = document.getElementById('password').value;
+        //     if (username === 'a' && password === '123') {
+        //         ons.notification.alert('Welcone Mockfood');
+        //         content.load('tabbar.html')
+        //             .then(menu.close.bind(menu));
+
+        //     } else {
+        //         ons.notification.alert('username=a and password=123');
+        //     }
+        // });
 
         $("#backbtn").click(function () {
             var content = document.getElementById('content');
@@ -115,66 +123,66 @@ document.addEventListener('init', function (event) {
     }
 
     if (page.id === "tab1") {
-       
+
         db.collection("recommended").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              
-            var item = `
+            querySnapshot.forEach((doc) => {
+
+                var item = `
             <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_items">
                 <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
                 </div>
                 <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
             </ons-carousel-item>`
-    
-            $("#carousel").append(item);
-    
-    
-          });
+
+                $("#carousel").append(item);
+
+
+            });
         });
 
         db.collection("recommended").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
-                
-              var item1 = `
+
+                var item1 = `
               <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
                   <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
                   </div>
                   <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
               </ons-carousel-item>`
-      
-              $("#carousels").append(item1);
-      
-      
+
+                $("#carousels").append(item1);
+
+
             });
-          });
-  
-    
-      }
+        });
 
 
-      if (page.id === 'homePage') {
+    }
+
+
+    if (page.id === 'homePage') {
         console.log("homePage");
 
-    
+
         $("#carousel").empty();
         db.collection("recommended").get().then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-              
-            var item = `
+            querySnapshot.forEach((doc) => {
+
+                var item = `
             <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
                 <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
                 </div>
                 <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
             </ons-carousel-item>`
-    
-            $("#carousel").append(item);
-    
-    
-          });
+
+                $("#carousel").append(item);
+
+
+            });
         });
-    
-      }
-    
+
+    }
+
 
     if (page.id === "tab2") {
 
@@ -224,13 +232,13 @@ document.addEventListener('init', function (event) {
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
- 
+
         $("#mainmenu").click(function () {
             var content = document.getElementById('content');
             content.load('rest1.html');
         });
 
-         $("#noodlemenu").click(function () {
+        $("#noodlemenu").click(function () {
             var content = document.getElementById('content');
             content.load('rest11.html');
         });
@@ -277,7 +285,7 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-       $("#backbtn").click(function () {
+        $("#backbtn").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
             content.load('rest1.html')
@@ -298,10 +306,10 @@ document.addEventListener('init', function (event) {
             ons.notification.alert('thank you');
         });
 
-        
+
     }
 
-    
+
 
     if (page.id === "sidemenu") {
         //Code for sidemenu
@@ -331,7 +339,7 @@ document.addEventListener('init', function (event) {
         });
     }
 
-    
+
 
 
 
