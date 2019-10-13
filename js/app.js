@@ -1,19 +1,30 @@
 
    //initial firebase
-   var firebaseConfig = {
-    apiKey: "AIzaSyCKq4RohgjtKq85_nuEFW0t9esnv0jOhF4",
-    authDomain: "fastfood-d742f.firebaseapp.com",
-    databaseURL: "https://fastfood-d742f.firebaseio.com",
-    projectId: "fastfood-d742f",
-    storageBucket: "fastfood-d742f.appspot.com",
-    messagingSenderId: "959087323418",
-    appId: "1:959087323418:web:c926ea3dd9d34a2f64a4a3"
-   };
-   firebase.initializeApp(firebaseConfig);
+//    var firebaseConfig = {
+//     apiKey: "AIzaSyCKq4RohgjtKq85_nuEFW0t9esnv0jOhF4",
+//     authDomain: "fastfood-d742f.firebaseapp.com",
+//     databaseURL: "https://fastfood-d742f.firebaseio.com",
+//     projectId: "fastfood-d742f",
+//     storageBucket: "fastfood-d742f.appspot.com",
+//     messagingSenderId: "959087323418",
+//     appId: "1:959087323418:web:c926ea3dd9d34a2f64a4a3"
+//    };
+//    firebase.initializeApp(firebaseConfig);
 
-   var db = firebase.firestore();
+//    var db = firebase.firestore();
 
-
+var firebaseConfig = {
+    apiKey: "AIzaSyDE0ldLjuWiAYtcbl3G9kKalNOwxeFw3yg",
+    authDomain: "food-e0c82.firebaseapp.com",
+    databaseURL: "https://food-e0c82.firebaseio.com",
+    projectId: "food-e0c82",
+    storageBucket: "food-e0c82.appspot.com",
+    messagingSenderId: "909826880316",
+    appId: "1:909826880316:web:bc7974ce3d92b90c63a439"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 // ดูสถานะการ login
 
 
@@ -104,7 +115,6 @@ document.addEventListener('init', function (event) {
     }
 
     if (page.id === "tab1") {
-       
        
         db.collection("recommended").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
