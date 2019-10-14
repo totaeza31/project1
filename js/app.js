@@ -61,8 +61,7 @@ document.addEventListener('init', function (event) {
                 });
 
         })
-
-
+        
 
         $("#signinbtn").click(function () {
             var username = $("#username").val();
