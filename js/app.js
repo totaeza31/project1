@@ -45,13 +45,32 @@ document.addEventListener('init', function (event) {
     if (page.id === 'loginPage') {
         console.log("loginPage");
 
+        $("#signupbtn").click(function () {
+            var username = $("#username1").val();
+            var password = $("#password1").val();
+        firebase.auth().createUserWithEmailAndPassword(username, password)
+                .then(function (result) {
+                    console.log(result);
+                    ons.notification.alert("Regis Complete!!!");
+                    content.load('login.html')
+                        .then(menu.close.bind(menu));
+
+                }).catch(function (error) {
+                    console.log(error.message);
+                    ons.notification.alert(error.message);
+                });
+
+        })
+
+
+
         $("#signinbtn").click(function () {
             var username = $("#username").val();
             var password = $("#password").val();
 
 
             firebase.auth().signInWithEmailAndPassword(username, password)
-                .then(function (result) {
+            .then(function (result) {
                     console.log(result);
                     ons.notification.alert("LOGIN Complete!!!");
                     content.load('tabbar.html')
@@ -63,6 +82,12 @@ document.addEventListener('init', function (event) {
                 });
 
         })
+        $("#regisbtn1").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('regis.html')
+                .then(menu.close.bind(menu));
+        });
 
         $("#backhomebtn").click(function () {
             $("#content")[0].load("home.html");
@@ -76,21 +101,6 @@ document.addEventListener('init', function (event) {
             menu.open();
         });
 
-
-
-        // $("#signinbtn").click(function () {
-        //     var username = document.getElementById('username').value;
-        //     var password = document.getElementById('password').value;
-        //     if (username === 'a' && password === '123') {
-        //         ons.notification.alert('Welcone Mockfood');
-        //         content.load('tabbar.html')
-        //             .then(menu.close.bind(menu));
-
-        //     } else {
-        //         ons.notification.alert('username=a and password=123');
-        //     }
-        // });
-
         $("#backbtn").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
@@ -98,12 +108,7 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-        $("#regisbtn1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('regis.html')
-                .then(menu.close.bind(menu));
-        });
+  
 
         $("#fbtn").click(function () {
             var content = document.getElementById('content');
