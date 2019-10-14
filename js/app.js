@@ -61,7 +61,23 @@ document.addEventListener('init', function (event) {
                 });
 
         })
-        
+
+        $("#gmailbtn").click(function () {
+
+            var provider = new firebase.auth.GoogleAuthProvider();
+    
+              firebase.auth().signInWithPopup(provider).then(function(result) {
+
+                content.load('tabbar.html')
+                        .then(menu.close.bind(menu));
+
+
+              }).catch(function(error) {
+                  console.log(error);
+              });
+
+        })  
+
 
         $("#signinbtn").click(function () {
             var username = $("#username").val();
