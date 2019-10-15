@@ -277,12 +277,45 @@ document.addEventListener('init', function (event) {
 
     }
 
-
     if (page.id === "resturant") {
-
-
-        
+    
         db.collection("itemrest1").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+
+                var item1 = `
+
+               <button class="button--quiet" width="100%" id="${doc.data().id}">
+                <ul class="list ">
+                    <li class="list-item">
+                        <div class="list-item__left">
+        
+                        </div>
+                        <div class="list-item__center">
+                            <div class="list-item__title">${doc.data().name}</div>
+                            <div class="list-item__subtitle">${doc.data().price} Bath</div>
+                            <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                            </div>
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
+                        </div>
+                    </li>
+                </ul>
+            </button>        
+              `
+                $("#carousel7").append(item1);
+            });
+            $("#carousel7").click(function () {
+                content.load('busket.html')
+                    .then(menu.close.bind(menu));
+            });
+        });
+
+        db.collection("itemrest11").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
 
                 var item1 = `
@@ -311,18 +344,14 @@ document.addEventListener('init', function (event) {
             </button>
               
               `
-                $("#carousel7").append(item1);
+                $("#carousel8").append(item1);
             });
 
-
-
-            $("#carousel7").click(function () {
+            $("#carousel8").click(function () {
                 content.load('busket.html')
                     .then(menu.close.bind(menu));
             });
         });
-
-
 
         $("#homebtn1").click(function () {
           
@@ -343,32 +372,6 @@ document.addEventListener('init', function (event) {
         $("#noodlemenu").click(function () {
             var content = document.getElementById('content');
             content.load('rest11.html');
-        });
-
-        $("#orderrest1").click(function () {
-           
-            content.load('busket.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#orderrest2").click(function () {
-           
-            content.load('busket.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#orderrest3").click(function () {
-           
-            content.load('busket.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#orderrest4").click(function () {
-            
-            content.load('busket.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#orderrest5").click(function () {
-          
-            content.load('busket.html')
-                .then(menu.close.bind(menu));
         });
 
     }
