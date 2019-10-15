@@ -20,25 +20,14 @@ var db = firebase.firestore();
 document.addEventListener('init', function (event) {
     var page = event.target;
 
-
-
-    //login
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            // User is signed in.
-            //var displayName = user.displayName;
             var email = user.email;
             console.log(email + "signed in");
-            // var emailVerified = user.emailVerified;
-            // var photoURL = user.photoURL;
-            // var isAnonymous = user.isAnonymous;
-            // var uid = user.uid;
-            // var providerData = user.providerData;
-            // ...
+          
         } else {
             console.log("sign out");
-            // User is signed out.
-            // ...
+       
         }
     });
 
@@ -215,7 +204,7 @@ document.addEventListener('init', function (event) {
                 var item3 = `
               <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
               <ons-button modifier="quiet">
-                  <div class="thumbnails" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
+                  <div class="thumbnailss" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
                   </div>
                   <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
                   </ons-button>
@@ -224,7 +213,6 @@ document.addEventListener('init', function (event) {
                 $("#carousel2").append(item3);
             });
         });
-
 
         db.collection("promotionOnefreeOne").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
@@ -237,7 +225,6 @@ document.addEventListener('init', function (event) {
                   <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
                   </ons-button>
               </ons-carousel-item>`
-
                 $("#carousels").append(item1);
             });
         });
@@ -343,7 +330,7 @@ document.addEventListener('init', function (event) {
     }
 
     if (page.id === "busket") {
-        //Code for sidemenu
+
         $("#agianbtn").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
@@ -366,16 +353,16 @@ document.addEventListener('init', function (event) {
 
 
         $("#paybtn").click(function () {
-            ons.notification.alert('thank you');
+            ons.notification.alert('ชำระเงินสำเร็จ');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
         });
         $("#rbtn").click(function () {
-            ons.notification.alert('thank you');
+            ons.notification.alert('กรุณารอรับอาหาร');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
         });
-
-
     }
-
-
 
     if (page.id === "sidemenu") {
         //Code for sidemenu
@@ -404,16 +391,5 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
     }
-
-
-
-
-
-
-
-
-
-
-
 
 });
