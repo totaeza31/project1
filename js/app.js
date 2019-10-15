@@ -48,7 +48,7 @@ document.addEventListener('init', function (event) {
         $("#signupbtn").click(function () {
             var username = $("#username1").val();
             var password = $("#password1").val();
-        firebase.auth().createUserWithEmailAndPassword(username, password)
+            firebase.auth().createUserWithEmailAndPassword(username, password)
                 .then(function (result) {
                     console.log(result);
                     ons.notification.alert("Regis Complete!!!");
@@ -65,18 +65,18 @@ document.addEventListener('init', function (event) {
         $("#gmailbtn").click(function () {
 
             var provider = new firebase.auth.GoogleAuthProvider();
-    
-              firebase.auth().signInWithPopup(provider).then(function(result) {
+
+            firebase.auth().signInWithPopup(provider).then(function (result) {
 
                 content.load('tabbar.html')
-                        .then(menu.close.bind(menu));
+                    .then(menu.close.bind(menu));
 
 
-              }).catch(function(error) {
-                  console.log(error);
-              });
+            }).catch(function (error) {
+                console.log(error);
+            });
 
-        })  
+        })
 
 
         $("#signinbtn").click(function () {
@@ -85,7 +85,7 @@ document.addEventListener('init', function (event) {
 
 
             firebase.auth().signInWithEmailAndPassword(username, password)
-            .then(function (result) {
+                .then(function (result) {
                     console.log(result);
                     ons.notification.alert("LOGIN Complete!!!");
                     content.load('tabbar.html')
@@ -123,7 +123,7 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-  
+
 
         $("#fbtn").click(function () {
             var content = document.getElementById('content');
@@ -155,54 +155,24 @@ document.addEventListener('init', function (event) {
             </ons-carousel-item>`
 
                 $("#carousel").append(item);
-
-
             });
         });
 
-        db.collection("recommended").get().then((querySnapshot1) => {
+
+        db.collection("promotionOnefreeOne").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
 
                 var item1 = `
               <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-                  <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+                  <div class="thumbnails" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
                   </div>
                   <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
               </ons-carousel-item>`
 
                 $("#carousels").append(item1);
-
-
             });
         });
-
-
     }
-
-
-    if (page.id === 'homePage') {
-        console.log("homePage");
-
-
-        $("#carousel").empty();
-        db.collection("recommended").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-
-                var item = `
-            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-                <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
-                </div>
-                <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
-            </ons-carousel-item>`
-
-                $("#carousel").append(item);
-
-
-            });
-        });
-
-    }
-
 
     if (page.id === "tab2") {
 
