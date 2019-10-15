@@ -142,39 +142,21 @@ document.addEventListener('init', function (event) {
 
     }
 
-    if (page.id === "tab1") {
 
-        db.collection("recommended").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-
-                var item = `
-            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_items">
-                <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
-                </div>
-                <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
-            </ons-carousel-item>`
-
-                $("#carousel").append(item);
-            });
+    if(page.id === "tab3"){
+        
+        $("#homebtn1").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
         });
-
-
-        db.collection("promotionOnefreeOne").get().then((querySnapshot1) => {
-            querySnapshot1.forEach((doc) => {
-
-                var item1 = `
-              <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
-                  <div class="thumbnails" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
-                  </div>
-                  <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
-              </ons-carousel-item>`
-
-                $("#carousels").append(item1);
-            });
+        $("#backbtn").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
         });
-    }
-
-    if (page.id === "tab2") {
 
         $("#rest1").click(function () {
             var content = document.getElementById('content');
@@ -206,6 +188,100 @@ document.addEventListener('init', function (event) {
             content.load('rest1.html')
                 .then(menu.close.bind(menu));
         });
+    }
+
+    if (page.id === "tab1") {
+
+        db.collection("recommended").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                var item = `
+            <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_items">
+            <ons-button modifier="quiet">
+                <div class="thumbnail" style="background-image: url('${doc.data().photoUrl}')">
+                </div>
+                <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+                </ons-button>
+            </ons-carousel-item>`
+
+                $("#carousel").append(item);
+            });
+        });
+
+
+        db.collection("fastdelivery").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+
+                var item3 = `
+              <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+              <ons-button modifier="quiet">
+                  <div class="thumbnails" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
+                  </div>
+                  <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+                  </ons-button>
+              </ons-carousel-item>`
+
+                $("#carousel2").append(item3);
+            });
+        });
+
+
+        db.collection("promotionOnefreeOne").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+
+                var item1 = `
+              <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
+              <ons-button modifier="quiet">
+                  <div class="thumbnails" style="background-image: url('${doc.data().photoUrl}') ;width="200px">
+                  </div>
+                  <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
+                  </ons-button>
+              </ons-carousel-item>`
+
+                $("#carousels").append(item1);
+            });
+        });
+    }
+
+    if (page.id === "tab2") {
+
+        $("#rest1").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+        $("#rest2").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+        $("#rest3").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+        $("#rest4").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+        $("#rest5").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+        $("#rest6").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('resturent.html')
+                .then(menu.close.bind(menu));
+        });
+
     }
 
 
