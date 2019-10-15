@@ -24,15 +24,22 @@ document.addEventListener('init', function (event) {
         if (user) {
             var email = user.email;
             console.log(email + "signed in");
-          
+
         } else {
             console.log("sign out");
-       
+
         }
     });
 
     if (page.id === 'loginPage') {
+
         console.log("loginPage");
+
+        $("#backbtn").click(function () {
+
+            content.load('login.html')
+                .then(menu.close.bind(menu));
+        });
 
         $("#signupbtn").click(function () {
             var username = $("#username1").val();
@@ -67,12 +74,9 @@ document.addEventListener('init', function (event) {
 
         })
 
-
         $("#signinbtn").click(function () {
             var username = $("#username").val();
             var password = $("#password").val();
-
-
             firebase.auth().signInWithEmailAndPassword(username, password)
                 .then(function (result) {
                     console.log(result);
@@ -112,8 +116,6 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-
-
         $("#fbtn").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
@@ -127,13 +129,10 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-
-
     }
 
+    if (page.id === "tab3") {
 
-    if(page.id === "tab3"){
-        
         $("#homebtn1").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
@@ -147,48 +146,15 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-        $("#rest1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest2").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest3").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest4").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest5").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
-
-
-
         db.collection("fontcategory").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
-                
+
                 var item5 = `
-                <button class="button--quiet" width="100%" id="rest1">
+                <button class="button--quiet" width="100%" id="${doc.data().id}">
                     <li class="list-item">
                         <div class="list-item__left" >
-                            <img width="130px"height="80px"
-                            style="background-image: url('${doc.data().photoUrl}')">
+                            <img width="130px"height="80px" 
+                            style="background-image: url('${doc.data().photoUrl}') ;  background-size: cover;">
                         </div>
                         <div class="list-item__center">
                             <div class="list-item__title">${doc.data().name}</div>
@@ -201,10 +167,14 @@ document.addEventListener('init', function (event) {
                     </li>
             </button> 
               `
-              $("#carousel5").append(item5)
-            });  
+                $("#carousel5").append(item5)
+            });
+            $("#carousel5").click(function () {
+                content.load('rest1.html')
+                    .then(menu.close.bind(menu));
+            });
         });
-     }
+    }
 
     if (page.id === "tab1") {
 
@@ -222,8 +192,13 @@ document.addEventListener('init', function (event) {
 
                 $("#carousel").append(item);
             });
-        });
 
+            $("#carousel").click(function () {
+                content.load('rest1.html')
+                    .then(menu.close.bind(menu));
+            });
+
+        });
 
         db.collection("fastdelivery").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
@@ -238,6 +213,10 @@ document.addEventListener('init', function (event) {
               </ons-carousel-item>`
 
                 $("#carousel2").append(item3);
+            });
+            $("#carousel2").click(function () {
+                content.load('rest1.html')
+                    .then(menu.close.bind(menu));
             });
         });
 
@@ -254,47 +233,44 @@ document.addEventListener('init', function (event) {
               </ons-carousel-item>`
                 $("#carousels").append(item1);
             });
+
+            $("#carousels").click(function () {
+                content.load('rest1.html')
+                    .then(menu.close.bind(menu));
+            });
         });
-
-
 
     }
 
     if (page.id === "tab2") {
 
         $("#rest1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+        
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
         $("#rest2").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
         $("#rest3").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+         
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
         $("#rest4").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
         $("#rest5").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
         $("#rest6").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('resturent.html')
                 .then(menu.close.bind(menu));
         });
@@ -303,15 +279,58 @@ document.addEventListener('init', function (event) {
 
 
     if (page.id === "resturant") {
+
+
+        
+        db.collection("itemrest1").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+
+                var item1 = `
+
+               <button class="button--quiet" width="100%" id="${doc.data().id}">
+                <ul class="list ">
+                    <li class="list-item">
+                        <div class="list-item__left">
+        
+                        </div>
+                        <div class="list-item__center">
+                            <div class="list-item__title">${doc.data().name}</div>
+                            <div class="list-item__subtitle">${doc.data().price} Bath</div>
+                            <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                            </div>
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
+                        </div>
+                    </li>
+                </ul>
+            </button>
+              
+              `
+                $("#carousel7").append(item1);
+            });
+
+
+
+            $("#carousel7").click(function () {
+                content.load('busket.html')
+                    .then(menu.close.bind(menu));
+            });
+        });
+
+
+
         $("#homebtn1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#backbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
@@ -327,32 +346,27 @@ document.addEventListener('init', function (event) {
         });
 
         $("#orderrest1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
         $("#orderrest2").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
         $("#orderrest3").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
         $("#orderrest4").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+            
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
         $("#orderrest5").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
@@ -362,21 +376,18 @@ document.addEventListener('init', function (event) {
     if (page.id === "busket") {
 
         $("#agianbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('rest1.html')
                 .then(menu.close.bind(menu));
         });
 
         $("#backbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('rest1.html')
                 .then(menu.close.bind(menu));
         });
         $("#homebtn1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
@@ -397,26 +408,22 @@ document.addEventListener('init', function (event) {
     if (page.id === "sidemenu") {
         //Code for sidemenu
         $("#homebtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+            
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#loginbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('login.html')
                 .then(menu.close.bind(menu));
         });
         $("#regisbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+         
             content.load('regis.html')
                 .then(menu.close.bind(menu));
         });
         $("#basbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+        
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
