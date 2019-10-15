@@ -177,7 +177,34 @@ document.addEventListener('init', function (event) {
             content.load('rest1.html')
                 .then(menu.close.bind(menu));
         });
-    }
+
+
+
+        db.collection("fontcategory").get().then((querySnapshot1) => {
+            querySnapshot1.forEach((doc) => {
+                
+                var item5 = `
+                <button class="button--quiet" width="100%" id="rest1">
+                    <li class="list-item">
+                        <div class="list-item__left" >
+                            <img width="130px"height="80px"
+                            style="background-image: url('${doc.data().photoUrl}')">
+                        </div>
+                        <div class="list-item__center">
+                            <div class="list-item__title">${doc.data().name}</div>
+                            <div class="list-item__subtitle">${doc.data().category}</div>
+                            <div class="list-item__subtitle">
+                                <i class="zmdi zmdi-star" style="color:yellow"></i> ${doc.data().star}
+                                <i class="zmdi zmdi-pin"></i>
+                                ${doc.data().lo}</div>
+                        </div>
+                    </li>
+            </button> 
+              `
+              $("#carousel5").append(item5)
+            });  
+        });
+     }
 
     if (page.id === "tab1") {
 
@@ -228,6 +255,9 @@ document.addEventListener('init', function (event) {
                 $("#carousels").append(item1);
             });
         });
+
+
+
     }
 
     if (page.id === "tab2") {
