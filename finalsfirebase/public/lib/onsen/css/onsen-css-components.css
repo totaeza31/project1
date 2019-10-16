@@ -2491,7 +2491,7 @@ h4, h5, h6 {
 }
 :checked + .tabbar--material__button {
   background-color: transparent;
-  color: #ffffff;
+  color: white;
 }
 .tabbar--material__item:not([ripple]):active {
   background-color: #26a69a;
