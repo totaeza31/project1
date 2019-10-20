@@ -1,30 +1,75 @@
 <ons-page id="tab3">
 
-        <div class="toolbar toolbar--material" style="background-color: white;">
-                <div class="toolbar__left toolbar--material__left" id="backbtn" >
-                  <span class="toolbar-button toolbar-button--material" style="color: black;">
-                        <i class="zmdi zmdi-chevron-left "></i>
-                        Back 
-                  </span>
-                </div>
-                <div class="toolbar__center toolbar--material__center">
-                 
-                </div>
-                <div class="toolbar__right toolbar--material__right" id="homebtn1">
-                  <span class="toolbar-button toolbar-button--material"style="color: black;">Home
-             
-                 </span>    
-                </div>
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+<template id="page1.html">
+  <ons-page id="page1">
+
+
+  
+
+      <div class="toolbar toolbar--material" style="background-color: white;">
+              <div class="toolbar__left toolbar--material__left" id="backbtn" >
+                <span class="toolbar-button toolbar-button--material" style="color: black;">
+                      <i class="zmdi zmdi-chevron-left "></i>
+                      Back 
+                </span>
               </div>
-              
+              <div class="toolbar__center toolbar--material__center">
+               
+              </div>
+              <div class="toolbar__right toolbar--material__right" id="homebtn1">
+                <span class="toolbar-button toolbar-button--material"style="color: black;">Home
+           
+               </span>    
+              </div>
+    </div>
+            
 <div style="text-align: center;"> <h2>หมวด ทั้งหมด </h2></div>
 
 
 <!-- show restaurent -->
-        <div id="carousel5">
-  
-        </div>
+      <div id="carousel5">
 
-    </ons-page>
+      </div>
+
+
+
+  </ons-page>
+</template>
+
+<template id="page2.html">
+  <ons-page id="page2">
+
+      <div class="toolbar toolbar--material" style="background-color: white;">
+          <div class="toolbar__left toolbar--material__left" id="backbtn">
+            <div class="left"><ons-back-button >Back</ons-back-button></div>
+          </div>
+          <div class="toolbar__center toolbar--material__center">
+  
+          </div>
+          <div class="toolbar__right toolbar--material__right" id="homebtn1">
+              <span class="toolbar-button toolbar-button--material" style="color: black;">Home
+  
+              </span>
+  
+          </div>
+      </div>
+  
+      
+   <ons-carousel auto-scroll auto-scroll-ratio="0.5" auto-refresh swipeable overscrollable item-width="130px"
+   class="recomended_list" id="carousel8">               
+   </ons-carousel>
+      <ons-carousel auto-scroll auto-scroll-ratio="0.5" auto-refresh swipeable overscrollable item-width="130px"
+      class="recomended_list" id="carousel7">               
+      </ons-carousel>
+  
+  
+
+
+
+  </ons-page>
+</template>
+</ons-page>
 
   

@@ -18,17 +18,172 @@ var db = firebase.firestore();
 
 
 document.addEventListener('init', function (event) {
+
+
+
     var page = event.target;
+
+
+
+
+
+      
+        
+
+
+
+
+
+
+
+    if (page.id === 'page1') {
+        var category = localStorage.getItem("selectedCategory");
+        console.log("page1");
+
+        db.collection("fontcategory").where("type", "==", category).get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+
+                var item5 = `
+                <button class="button--quiet" onclick="myfunction(${doc.data().id})" width="100%" id="${doc.data().id}">
+                    <li class="list-item">
+                        <div class="list-item__left" >
+                            <img width="130px"height="80px" 
+                            style="background-image: url('${doc.data().photoUrl}') ;  background-size: cover;">
+                        </div>
+                        <div class="list-item__center">
+                            <div class="list-item__title">${doc.data().name}</div>
+                            <div class="list-item__subtitle">${doc.data().category}</div>
+                            <div class="list-item__subtitle">
+                                <i class="zmdi zmdi-star" style="color:yellow"></i> ${doc.data().star}
+                                <i class="zmdi zmdi-pin"></i>
+                                ${doc.data().lo}</div>
+                        </div>
+                    </li>
+            </button> 
+              `
+                $("#carousel5").append(item5)
+             
+            });
+        });
+
+        $("#backbtn").click(function () {
+            var content = document.getElementById('content');
+            var menu = document.getElementById('menu');
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
+        });
+
+      } 
+      
+      
+      if (page.id === 'page2') {
+        console.log("page2");
+        // var vars = page.data.numberrent;
+        var menurest = localStorage.getItem("selectedCategorys");
+
+
+
+ db.collection("fontcategory").where("id","==",menurest)
+        .get().then((querySnapshot2) => {
+            querySnapshot2.forEach((doc) => {
+
+                var item8 = `
+
+                <ul class="list " style="background-color:#FF9900 ;">
+                <li class="list-item">
+        
+                    <div class="list-item__center">
+                        <div class="list-item__title" style="color: white">
+                            <h3>${doc.data().name}</h3>
+                        </div>
+                        <div class="list-item__subtitle" style="color: white">${doc.data().category} <i class="zmdi zmdi-star"
+                                style="color:yellow"></i> ${doc.data().star}</div>
+                        <div class="list-item__subtitle">
+                        </div>
+                </li>
+        
+            </ul>
+            <img style="-webkit-filter: blur(4px); filter: blur(2px);" width="380px" height="100px"
+                src="${doc.data().photoUrl}">
+
+             
+              `
+                $("#carousel8").append(item8);
+            
+        
+            });});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+          console.log("idrest ที่ใช้เรียก " + menurest);
+          
+
+        db.collection("itemrest1").where("number","==",menurest)
+        .get().then((querySnapshot2) => {
+            querySnapshot2.forEach((doc) => {
+
+                var item7 = `
+
+                <ul class="list " id="${doc.data().id}" >
+                    <li class="list-item">
+                        <div class="list-item__left">
+        
+                        </div>
+                        <div class="list-item__center">
+                            <div class="list-item__title">${doc.data().name}</div>
+                            <div class="list-item__subtitle">${doc.data().price} Bath</div>
+                            <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                            </div>
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                        </div>
+                        <div class="list-item__right list-item--material__right">
+                            <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
+                        </div>
+                    </li>
+                </ul>
+             
+              `
+                $("#carousel7").append(item7);
+            
+        
+            });});
+
+            $("#backbtn").click(function () {
+          
+                content.load('tabbar.html')
+                    .then(menu.close.bind(menu));
+            });
+
+
+      }
+
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var email = user.email;
             console.log(email + "signed in");
 
-        } else {
-            console.log("sign out");
-
-        }
+        } 
     });
 
     if (page.id === 'loginPage') {
@@ -91,8 +246,7 @@ document.addEventListener('init', function (event) {
 
         })
         $("#regisbtn1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+            
             content.load('regis.html')
                 .then(menu.close.bind(menu));
         });
@@ -110,70 +264,72 @@ document.addEventListener('init', function (event) {
         });
 
         $("#backbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
 
         $("#fbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+           
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#gbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
 
+
     }
+
+
 
     if (page.id === "tab3") {
 
+
+
         $("#homebtn1").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+         
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#backbtn").click(function () {
-            var content = document.getElementById('content');
-            var menu = document.getElementById('menu');
+            
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
 
-        db.collection("fontcategory").get().then((querySnapshot1) => {
-            querySnapshot1.forEach((doc) => {
+        // db.collection("fontcategory").get().then((querySnapshot1) => {
+        //     querySnapshot1.forEach((doc) => {
 
-                var item5 = `
-                <button class="button--quiet" width="100%" id="${doc.data().id}">
-                    <li class="list-item">
-                        <div class="list-item__left" >
-                            <img width="130px"height="80px" 
-                            style="background-image: url('${doc.data().photoUrl}') ;  background-size: cover;">
-                        </div>
-                        <div class="list-item__center">
-                            <div class="list-item__title">${doc.data().name}</div>
-                            <div class="list-item__subtitle">${doc.data().category}</div>
-                            <div class="list-item__subtitle">
-                                <i class="zmdi zmdi-star" style="color:yellow"></i> ${doc.data().star}
-                                <i class="zmdi zmdi-pin"></i>
-                                ${doc.data().lo}</div>
-                        </div>
-                    </li>
-            </button> 
-              `
-                $("#carousel5").append(item5)
-            });
-            $("#carousel5").click(function () {
-                content.load('rest1.html')
-                    .then(menu.close.bind(menu));
-            });
-        });
+        //         var item5 = `
+        //         <button class="button--quiet" onclick="myfunction(${doc.data().id})" width="100%" id="${doc.data().id}">
+        //             <li class="list-item">
+        //                 <div class="list-item__left" >
+        //                     <img width="130px"height="80px" 
+        //                     style="background-image: url('${doc.data().photoUrl}') ;  background-size: cover;">
+        //                 </div>
+        //                 <div class="list-item__center">
+        //                     <div class="list-item__title">${doc.data().name}</div>
+        //                     <div class="list-item__subtitle">${doc.data().category}</div>
+        //                     <div class="list-item__subtitle">
+        //                         <i class="zmdi zmdi-star" style="color:yellow"></i> ${doc.data().star}
+        //                         <i class="zmdi zmdi-pin"></i>
+        //                         ${doc.data().lo}</div>
+        //                 </div>
+        //             </li>
+        //     </button> 
+        //       `
+        //         $("#carousel5").append(item5)
+
+        //     });
+
+            // $("#carousel5").click(function () {
+            //     content.load('rest1.html')
+            //         .then(menu.close.bind(menu));
+            // });
+       
     }
 
     if (page.id === "tab1") {
@@ -243,77 +399,104 @@ document.addEventListener('init', function (event) {
     }
 
     if (page.id === "tab2") {
+        console.log("tab2");
 
-        $("#rest1").click(function () {
+
+        $("#thaibtn").click(function () {
+            localStorage.setItem("selectedCategory", "thai");
+            $("#content")[0].load("resturent.html");
+          });
+          $("#allbtn").click(function () {
+            localStorage.setItem("selectedCategory", "all");
+            $("#content")[0].load("resturent.html");
+          });
+          $("#fastbtn").click(function () {
+            localStorage.setItem("selectedCategory", "fast");
+            $("#content")[0].load("resturent.html");
+          });
+          $("#seabtn").click(function () {
+            localStorage.setItem("selectedCategory", "sea");
+            $("#content")[0].load("resturent.html");
+          });
+          $("#spicybtn").click(function () {
+            localStorage.setItem("selectedCategory", "spicy");
+            $("#content")[0].load("resturent.html");
+          });
+          $("#streetbtn").click(function () {
+            localStorage.setItem("selectedCategory", "street");
+            $("#content")[0].load("resturent.html");
+          });
+
+        // $("#rest1").click(function () {
         
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest2").click(function () {
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
+        // $("#rest2").click(function () {
            
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest3").click(function () {
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
+        // $("#rest3").click(function () {
          
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest4").click(function () {
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
+        // $("#rest4").click(function () {
           
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest5").click(function () {
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
+        // $("#rest5").click(function () {
            
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
-        $("#rest6").click(function () {
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
+        // $("#rest6").click(function () {
            
-            content.load('resturent.html')
-                .then(menu.close.bind(menu));
-        });
+        //     content.load('resturent.html')
+        //         .then(menu.close.bind(menu));
+        // });
 
     }
 
     if (page.id === "resturant") {
-    
-        db.collection("itemrest1").get().then((querySnapshot1) => {
-            querySnapshot1.forEach((doc) => {
+        console.log("rest1");
+        // db.collection("itemrest1").get().then((querySnapshot1) => {
+        //     querySnapshot1.forEach((doc) => {
 
-                var item1 = `
+        //         var item1 = `
 
-               <button class="button--quiet" width="100%" id="${doc.data().id}">
-                <ul class="list ">
-                    <li class="list-item">
-                        <div class="list-item__left">
+        //        <button class="button--quiet" width="100%" id="${doc.data().id}">
+        //         <ul class="list ">
+        //             <li class="list-item">
+        //                 <div class="list-item__left">
         
-                        </div>
-                        <div class="list-item__center">
-                            <div class="list-item__title">${doc.data().name}</div>
-                            <div class="list-item__subtitle">${doc.data().price} Bath</div>
-                            <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                            </div>
-                        </div>
-                        <div class="list-item__right list-item--material__right">
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                        </div>
-                        <div class="list-item__right list-item--material__right">
-                            <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
-                        </div>
-                    </li>
-                </ul>
-            </button>        
-              `
-                $("#carousel7").append(item1);
-            });
-            $("#carousel7").click(function () {
-                content.load('busket.html')
-                    .then(menu.close.bind(menu));
-            });
-        });
+        //                 </div>
+        //                 <div class="list-item__center">
+        //                     <div class="list-item__title">${doc.data().name}</div>
+        //                     <div class="list-item__subtitle">${doc.data().price} Bath</div>
+        //                     <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        //                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+        //                     </div>
+        //                 </div>
+        //                 <div class="list-item__right list-item--material__right">
+        //                     &nbsp; &nbsp; &nbsp; &nbsp;
+        //                 </div>
+        //                 <div class="list-item__right list-item--material__right">
+        //                     <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
+        //                 </div>
+        //             </li>
+        //         </ul>
+        //     </button>        
+        //       `
+        //         $("#carousel7").append(item1);
+        //     });
+        //     $("#carousel7").click(function () {
+        //         content.load('busket.html')
+        //             .then(menu.close.bind(menu));
+        //     });
+        // });
 
         db.collection("itemrest11").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
@@ -374,6 +557,14 @@ document.addEventListener('init', function (event) {
             content.load('rest11.html');
         });
 
+
+
+
+  
+
+
+
+
     }
 
     if (page.id === "busket") {
@@ -432,4 +623,18 @@ document.addEventListener('init', function (event) {
         });
     }
 
+
+    
+
+
+
+
 });
+
+
+function myfunction(idRent){
+    // console.log("id ร้าน"+idRent)
+    // document.querySelector('#myNavigator').pushPage('page2.html', {data: {numberrent: idRent}});
+    localStorage.setItem("selectedCategorys", idRent);
+    $("#content")[0].load("page2.html");
+}
