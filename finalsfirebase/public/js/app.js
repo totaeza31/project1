@@ -1,6 +1,4 @@
 
-
-
 var firebaseConfig = {
     apiKey: "AIzaSyDE0ldLjuWiAYtcbl3G9kKalNOwxeFw3yg",
     authDomain: "food-e0c82.firebaseapp.com",
@@ -79,11 +77,8 @@ document.addEventListener('init', function (event) {
     if (page.id === 'page2') {
 
        console.log("page2");
-        // var vars = page.data.numberrent;
         var menurest = localStorage.getItem("selectedCategorys");
         
-
-
         db.collection("fontcategory").where("id", "==", menurest)
             .get().then((querySnapshot2) => {
                 querySnapshot2.forEach((doc) => {
@@ -140,38 +135,14 @@ document.addEventListener('init', function (event) {
                 </ul>
               `
      
-                    $("#carousel7").append(item7);
-
-                
-                    
+                    $("#carousel7").append(item7);                   
                 });
-
-               
-
-                // var amounts = 1;
 
                 $("#addorders").click(function () {
                     
-                //     $('#amount').empty();
-                
-
-                // var totalamount = amounts++ ;
-                // var amout2=totalamount;
-                //  console.log("amount = "+totalamount);
-                           
-                //  $("#amount").append(amout2);
-
-       
-                });
-
-                
+                });              
             });
 
-
-  
-
-
-      
             $("#orderbtn").click(function () {
                 content.load('busket.html')
                     .then(menu.close.bind(menu));
@@ -442,14 +413,7 @@ document.addEventListener('init', function (event) {
                    
                 </ons-row>
                 <ons-row></ons-row>` 
-                // var arraycart2 = arrayMenu[i].includes(arrayMenu[i]);
-        
-                // if(arraycart2 == false){
-                //   total.push(parseInt(arrayPrice[i])*parseInt(arrayCount[i]));
-                // }else if(arraycart2 == true){
-                //   total.splice(i,1,parseInt(parseInt(arrayPrice[i])*parseInt(arrayCount[i])));
-                // }
-                // console.log(arrayMenu.length);
+           
                 
               $("#print").append(item);
               xx+=parseInt(arrayPrice[i]);
