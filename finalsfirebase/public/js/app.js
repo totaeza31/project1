@@ -148,20 +148,20 @@ document.addEventListener('init', function (event) {
 
                
 
-                var amounts = 1;
+                // var amounts = 1;
 
                 $("#addorders").click(function () {
                     
-                    $('#amount').empty();
+                //     $('#amount').empty();
                 
 
-                var totalamount = amounts++ ;
-                var amout2=totalamount;
-                 console.log("amount = "+totalamount);
+                // var totalamount = amounts++ ;
+                // var amout2=totalamount;
+                //  console.log("amount = "+totalamount);
                            
-                 $("#amount").append(amout2);
+                //  $("#amount").append(amout2);
 
-
+       
                 });
 
                 
@@ -449,6 +449,8 @@ document.addEventListener('init', function (event) {
                 // }else if(arraycart2 == true){
                 //   total.splice(i,1,parseInt(parseInt(arrayPrice[i])*parseInt(arrayCount[i])));
                 // }
+                // console.log(arrayMenu.length);
+                
               $("#print").append(item);
               xx+=parseInt(arrayPrice[i]);
             }
@@ -557,6 +559,6 @@ console.log(name);
 
        
     }
-
+    document.getElementById("amount").innerHTML =arrayMenu.length;
    
 }
