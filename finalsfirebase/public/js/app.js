@@ -549,15 +549,7 @@ console.log(name);
     }else if(arraycart == true){
       
         
-     
 
-
-
-      
-        
-
-
-       
     }
     document.getElementById("amount").innerHTML =arrayMenu.length;
    
