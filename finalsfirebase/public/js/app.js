@@ -9,6 +9,7 @@ var firebaseConfig = {
     storageBucket: "food-e0c82.appspot.com",
     messagingSenderId: "909826880316",
     appId: "1:909826880316:web:bc7974ce3d92b90c63a439"
+
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -16,35 +17,27 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 // ดูสถานะการ login
 
+var  arrayMenu=[];
+var arrayPrice=[];
+var arrayCount=[];
+var xx =0;
 
 document.addEventListener('init', function (event) {
 
 
-
     var page = event.target;
-
-
-
-
-
-      
-        
-
-
-
-
-
-
 
     if (page.id === 'page1') {
         var category = localStorage.getItem("selectedCategory");
+
         console.log("page1");
 
         db.collection("fontcategory").where("type", "==", category).get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
 
-                var item5 = `
+                    var item5 = `
+                
                 <button class="button--quiet" onclick="myfunction(${doc.data().id})" width="100%" id="${doc.data().id}">
                     <li class="list-item">
                         <div class="list-item__left" >
@@ -62,11 +55,14 @@ document.addEventListener('init', function (event) {
                     </li>
             </button> 
               `
-                $("#carousel5").append(item5)
-             
-            });
-        });
+                    $("#carousel5").append(item5);
 
+                });
+             var tot = `
+                <h2>หมวด           
+                `
+            $("#carousel6").append(tot + category);
+            });
         $("#backbtn").click(function () {
             var content = document.getElementById('content');
             var menu = document.getElementById('menu');
@@ -74,22 +70,24 @@ document.addEventListener('init', function (event) {
                 .then(menu.close.bind(menu));
         });
 
-      } 
-      
-      
-      if (page.id === 'page2') {
-        console.log("page2");
+        $("#homebtn1").click(function () {
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
+        });
+    }
+
+    if (page.id === 'page2') {
+
+       console.log("page2");
         // var vars = page.data.numberrent;
         var menurest = localStorage.getItem("selectedCategorys");
+        
 
 
-
- db.collection("fontcategory").where("id","==",menurest)
-        .get().then((querySnapshot2) => {
-            querySnapshot2.forEach((doc) => {
-
-                var item8 = `
-
+        db.collection("fontcategory").where("id", "==", menurest)
+            .get().then((querySnapshot2) => {
+                querySnapshot2.forEach((doc) => {
+                    var item8 = `
                 <ul class="list " style="background-color:#FF9900 ;">
                 <li class="list-item">
         
@@ -105,97 +103,101 @@ document.addEventListener('init', function (event) {
         
             </ul>
             <img style="-webkit-filter: blur(4px); filter: blur(2px);" width="380px" height="100px"
-                src="${doc.data().photoUrl}">
-
-             
+                src="${doc.data().photoUrl}">          
               `
-                $("#carousel8").append(item8);
-            
+                    $("#carousel8").append(item8);
+                });
+            });
+
+        console.log("idrest ที่ใช้เรียก " + menurest);
         
-            });});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-          console.log("idrest ที่ใช้เรียก " + menurest);
-          
-
-        db.collection("itemrest1").where("number","==",menurest)
-        .get().then((querySnapshot2) => {
-            querySnapshot2.forEach((doc) => {
-
-                var item7 = `
-
+        db.collection("itemrest1").where("number", "==", menurest)
+            .get().then((querySnapshot2) => {
+                querySnapshot2.forEach((doc) => {
+                    var item7 = `
                 <ul class="list " id="${doc.data().id}" >
                     <li class="list-item">
                         <div class="list-item__left">
         
                         </div>
-                        <div class="list-item__center">
+                        <div class="list-item__center"  style="width:100%;height:80px">
                             <div class="list-item__title">${doc.data().name}</div>
                             <div class="list-item__subtitle">${doc.data().price} Bath</div>
-                            <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                            <div class="list-item__subtitle"> 
                             </div>
                         </div>
                         <div class="list-item__right list-item--material__right">
                             &nbsp; &nbsp; &nbsp; &nbsp;
                         </div>
-                        <div class="list-item__right list-item--material__right">
+                     
+                        <div class="list-item__right list-item--material__right" id="addorders" >
+                        <ons-button modifier="quiet"  onclick="myfunction3(${doc.data().id},${doc.data().price},'${doc.data().name}')">
                             <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
+                            </ons-button>
                         </div>
+                  
                     </li>
                 </ul>
-             
               `
-                $("#carousel7").append(item7);
-            
-        
-            });});
+     
+                    $("#carousel7").append(item7);
 
+                
+                    
+                });
+
+               
+
+                var amounts = 1;
+
+                $("#addorders").click(function () {
+                    
+                    $('#amount').empty();
+                
+
+                var totalamount = amounts++ ;
+                var amout2=totalamount;
+                 console.log("amount = "+totalamount);
+                           
+                 $("#amount").append(amout2);
+
+
+                });
+
+                
+            });
+
+
+  
+
+
+      
+            $("#orderbtn").click(function () {
+                content.load('busket.html')
+                    .then(menu.close.bind(menu));
+            });
             $("#backbtn").click(function () {
-          
+                content.load('resturent.html')
+                    .then(menu.close.bind(menu));
+            });
+            $("#homebtn1").click(function () {
                 content.load('tabbar.html')
                     .then(menu.close.bind(menu));
             });
 
-
-      }
-
-
+    }
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var email = user.email;
             console.log(email + "signed in");
-
-        } 
+        }
     });
-
     if (page.id === 'loginPage') {
-
         console.log("loginPage");
-
         $("#backbtn").click(function () {
-
             content.load('login.html')
                 .then(menu.close.bind(menu));
         });
-
         $("#signupbtn").click(function () {
             var username = $("#username1").val();
             var password = $("#password1").val();
@@ -210,25 +212,16 @@ document.addEventListener('init', function (event) {
                     console.log(error.message);
                     ons.notification.alert(error.message);
                 });
-
         })
-
         $("#gmailbtn").click(function () {
-
             var provider = new firebase.auth.GoogleAuthProvider();
-
             firebase.auth().signInWithPopup(provider).then(function (result) {
-
-                content.load('tabbar.html')
+              content.load('tabbar.html')
                     .then(menu.close.bind(menu));
-
-
             }).catch(function (error) {
                 console.log(error);
             });
-
         })
-
         $("#signinbtn").click(function () {
             var username = $("#username").val();
             var password = $("#password").val();
@@ -243,14 +236,11 @@ document.addEventListener('init', function (event) {
                     console.log(error.message);
                     ons.notification.alert(error.message);
                 });
-
         })
         $("#regisbtn1").click(function () {
-            
             content.load('regis.html')
                 .then(menu.close.bind(menu));
         });
-
         $("#backhomebtn").click(function () {
             $("#content")[0].load("home.html");
         });
@@ -262,81 +252,36 @@ document.addEventListener('init', function (event) {
             var menu = document.getElementById('menu');
             menu.open();
         });
-
         $("#backbtn").click(function () {
-          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
-
         $("#fbtn").click(function () {
-           
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#gbtn").click(function () {
-          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
-
-
     }
-
-
-
     if (page.id === "tab3") {
-
-
-
         $("#homebtn1").click(function () {
-         
+
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#backbtn").click(function () {
-            
+
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
 
-        // db.collection("fontcategory").get().then((querySnapshot1) => {
-        //     querySnapshot1.forEach((doc) => {
-
-        //         var item5 = `
-        //         <button class="button--quiet" onclick="myfunction(${doc.data().id})" width="100%" id="${doc.data().id}">
-        //             <li class="list-item">
-        //                 <div class="list-item__left" >
-        //                     <img width="130px"height="80px" 
-        //                     style="background-image: url('${doc.data().photoUrl}') ;  background-size: cover;">
-        //                 </div>
-        //                 <div class="list-item__center">
-        //                     <div class="list-item__title">${doc.data().name}</div>
-        //                     <div class="list-item__subtitle">${doc.data().category}</div>
-        //                     <div class="list-item__subtitle">
-        //                         <i class="zmdi zmdi-star" style="color:yellow"></i> ${doc.data().star}
-        //                         <i class="zmdi zmdi-pin"></i>
-        //                         ${doc.data().lo}</div>
-        //                 </div>
-        //             </li>
-        //     </button> 
-        //       `
-        //         $("#carousel5").append(item5)
-
-        //     });
-
-            // $("#carousel5").click(function () {
-            //     content.load('rest1.html')
-            //         .then(menu.close.bind(menu));
-            // });
-       
     }
 
     if (page.id === "tab1") {
-
         db.collection("recommended").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-
                 var item = `
             <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_items">
             <ons-button modifier="quiet">
@@ -345,20 +290,17 @@ document.addEventListener('init', function (event) {
                 <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
                 </ons-button>
             </ons-carousel-item>`
-
                 $("#carousel").append(item);
             });
-
             $("#carousel").click(function () {
-                content.load('rest1.html')
-                    .then(menu.close.bind(menu));
-            });
+             
+                ons.notification.alert("เลือกแบบหมวดไปก่อนนะครับ!!");
 
+            });
         });
 
         db.collection("fastdelivery").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
-
                 var item3 = `
               <ons-carousel-item modifier="nodivider" id="${doc.data().id}" class="recomended_item">
               <ons-button modifier="quiet">
@@ -367,15 +309,14 @@ document.addEventListener('init', function (event) {
                   <div class="recomended_item_title" id="item1_name">${doc.data().name}</div>
                   </ons-button>
               </ons-carousel-item>`
-
                 $("#carousel2").append(item3);
             });
             $("#carousel2").click(function () {
-                content.load('rest1.html')
-                    .then(menu.close.bind(menu));
+
+                ons.notification.alert("เลือกแบบหมวดไปก่อนนะครับ!!");
+
             });
         });
-
         db.collection("promotionOnefreeOne").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
 
@@ -391,8 +332,9 @@ document.addEventListener('init', function (event) {
             });
 
             $("#carousels").click(function () {
-                content.load('rest1.html')
-                    .then(menu.close.bind(menu));
+
+                 ons.notification.alert("เลือกแบบหมวดไปก่อนนะครับ!!");
+
             });
         });
 
@@ -400,103 +342,35 @@ document.addEventListener('init', function (event) {
 
     if (page.id === "tab2") {
         console.log("tab2");
-
-
         $("#thaibtn").click(function () {
             localStorage.setItem("selectedCategory", "thai");
             $("#content")[0].load("resturent.html");
-          });
-          $("#allbtn").click(function () {
+        });
+        $("#allbtn").click(function () {
             localStorage.setItem("selectedCategory", "all");
             $("#content")[0].load("resturent.html");
-          });
-          $("#fastbtn").click(function () {
+        });
+        $("#fastbtn").click(function () {
             localStorage.setItem("selectedCategory", "fast");
             $("#content")[0].load("resturent.html");
-          });
-          $("#seabtn").click(function () {
+        });
+        $("#seabtn").click(function () {
             localStorage.setItem("selectedCategory", "sea");
             $("#content")[0].load("resturent.html");
-          });
-          $("#spicybtn").click(function () {
+        });
+        $("#spicybtn").click(function () {
             localStorage.setItem("selectedCategory", "spicy");
             $("#content")[0].load("resturent.html");
-          });
-          $("#streetbtn").click(function () {
+        });
+        $("#streetbtn").click(function () {
             localStorage.setItem("selectedCategory", "street");
             $("#content")[0].load("resturent.html");
-          });
-
-        // $("#rest1").click(function () {
-        
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
-        // $("#rest2").click(function () {
-           
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
-        // $("#rest3").click(function () {
-         
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
-        // $("#rest4").click(function () {
-          
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
-        // $("#rest5").click(function () {
-           
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
-        // $("#rest6").click(function () {
-           
-        //     content.load('resturent.html')
-        //         .then(menu.close.bind(menu));
-        // });
+        });
 
     }
 
     if (page.id === "resturant") {
         console.log("rest1");
-        // db.collection("itemrest1").get().then((querySnapshot1) => {
-        //     querySnapshot1.forEach((doc) => {
-
-        //         var item1 = `
-
-        //        <button class="button--quiet" width="100%" id="${doc.data().id}">
-        //         <ul class="list ">
-        //             <li class="list-item">
-        //                 <div class="list-item__left">
-        
-        //                 </div>
-        //                 <div class="list-item__center">
-        //                     <div class="list-item__title">${doc.data().name}</div>
-        //                     <div class="list-item__subtitle">${doc.data().price} Bath</div>
-        //                     <div class="list-item__subtitle"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        //                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-        //                     </div>
-        //                 </div>
-        //                 <div class="list-item__right list-item--material__right">
-        //                     &nbsp; &nbsp; &nbsp; &nbsp;
-        //                 </div>
-        //                 <div class="list-item__right list-item--material__right">
-        //                     <i class="zmdi zmdi-plus-square zmdi-hc-3x" style="color:orange"></i>
-        //                 </div>
-        //             </li>
-        //         </ul>
-        //     </button>        
-        //       `
-        //         $("#carousel7").append(item1);
-        //     });
-        //     $("#carousel7").click(function () {
-        //         content.load('busket.html')
-        //             .then(menu.close.bind(menu));
-        //     });
-        // });
 
         db.collection("itemrest11").get().then((querySnapshot1) => {
             querySnapshot1.forEach((doc) => {
@@ -537,62 +411,82 @@ document.addEventListener('init', function (event) {
         });
 
         $("#homebtn1").click(function () {
-          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#backbtn").click(function () {
-          
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
-
         $("#mainmenu").click(function () {
             var content = document.getElementById('content');
             content.load('rest1.html');
         });
-
         $("#noodlemenu").click(function () {
             var content = document.getElementById('content');
             content.load('rest11.html');
         });
 
-
-
-
-  
-
-
-
-
     }
 
     if (page.id === "busket") {
 
-        $("#agianbtn").click(function () {
-          
-            content.load('rest1.html')
-                .then(menu.close.bind(menu));
-        });
 
-        $("#backbtn").click(function () {
-          
+            for (i = 0; i < arrayMenu.length; i++) {
+         
+        
+                var item = `<ons-row>
+                <ons-col width="150px">${arrayMenu[i]}</ons-col>
+                <ons-col></ons-col> 
+                <ons-col>${arrayPrice[i]}</ons-col>
+                   
+                </ons-row>
+                <ons-row></ons-row>` 
+                // var arraycart2 = arrayMenu[i].includes(arrayMenu[i]);
+        
+                // if(arraycart2 == false){
+                //   total.push(parseInt(arrayPrice[i])*parseInt(arrayCount[i]));
+                // }else if(arraycart2 == true){
+                //   total.splice(i,1,parseInt(parseInt(arrayPrice[i])*parseInt(arrayCount[i])));
+                // }
+              $("#print").append(item);
+              xx+=parseInt(arrayPrice[i]);
+            }
+            
+    var tota = `<div>${xx}</div>`
+    $("#asd").append(tota);
+       
+
+        $("#agianbtn").click(function () {
             content.load('rest1.html')
                 .then(menu.close.bind(menu));
         });
-        $("#homebtn1").click(function () {
-          
+        $("#backbtn").click(function () {
+            arrayMenu=[];
+arrayPrice=[];
+ arrayCount=[];
+ xx =0;
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
-
-
+        $("#homebtn1").click(function () {
+            content.load('tabbar.html')
+                .then(menu.close.bind(menu));
+        });
         $("#paybtn").click(function () {
+            arrayMenu=[];
+            arrayPrice=[];
+             arrayCount=[];
+             xx =0;
             ons.notification.alert('ชำระเงินสำเร็จ');
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#rbtn").click(function () {
+            arrayMenu=[];
+            arrayPrice=[];
+             arrayCount=[];
+             xx =0;
             ons.notification.alert('กรุณารอรับอาหาร');
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
@@ -602,39 +496,67 @@ document.addEventListener('init', function (event) {
     if (page.id === "sidemenu") {
         //Code for sidemenu
         $("#homebtn").click(function () {
-            
+
             content.load('tabbar.html')
                 .then(menu.close.bind(menu));
         });
         $("#loginbtn").click(function () {
-           
+
             content.load('login.html')
                 .then(menu.close.bind(menu));
         });
         $("#regisbtn").click(function () {
-         
+
             content.load('regis.html')
                 .then(menu.close.bind(menu));
         });
         $("#basbtn").click(function () {
-        
+
             content.load('busket.html')
                 .then(menu.close.bind(menu));
         });
     }
 
-
-    
-
-
-
-
 });
 
-
-function myfunction(idRent){
-    // console.log("id ร้าน"+idRent)
-    // document.querySelector('#myNavigator').pushPage('page2.html', {data: {numberrent: idRent}});
+function myfunction(idRent) {
     localStorage.setItem("selectedCategorys", idRent);
     $("#content")[0].load("page2.html");
+}
+function myfunction3(idRent2,price,name) {
+
+        $("#showtabbar").show();
+    
+console.log(name);
+
+    console.log(price);
+    console.log(idRent2);
+
+
+    var arraycart = arrayMenu.includes(idRent2);
+    
+    if(arraycart == false){
+  
+        arrayMenu.push(name);
+        arrayPrice.push(price);
+        console.log('sss'+arrayMenu);
+        console.log(arrayPrice);
+        
+       
+  
+    }else if(arraycart == true){
+      
+        
+     
+
+
+
+      
+        
+
+
+       
+    }
+
+   
 }
